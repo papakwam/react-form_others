@@ -1,25 +1,40 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import  Container  from 'react-bootstrap/Container';
+import { Col, Row } from 'react-bootstrap';
+import Functional from './Components/Functional';
+import { Component } from 'react';
+import List from './Components/List';
 
-function App() {
+class App extends Component {
+
+  constructor(props) {
+    super (props)
+
+    this.state = {
+      students:[]
+    }
+  }
+
+  createStudent = (student) => {
+    this.setState({
+      students: [...this.state.students, student],
+    });
+  };
+
+  render() {
+    console.log(this.state.students)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <Container fluid>
+    <Row>
+    <Col xs={12} md={6} lg={6}><Functional newStudent={this.createStudent} /></Col>
+    <Col xs={12} md={6} lg={6}><List students={this.state.students}/></Col>
+    </Row>
+
+    
+  </Container>
   );
+  }
 }
 
 export default App;
