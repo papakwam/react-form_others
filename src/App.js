@@ -28,7 +28,7 @@ class App extends Component {
   <Container fluid>
     <Row>
     <Col xs={12} md={6} lg={6}><Functional newStudent={this.createStudent} /></Col>
-    <Col xs={12} md={6} lg={6}><List students={this.state.students}/></Col>
+    <Col xs={12} md={6} lg={6}><List students={this.state.students} onDeleteStudent={this.onDeleteStudent} /></Col>
     </Row>
 
     
