@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { v4 as uuidv4 } from 'uuid';
 
 function Functional(props) {
 
@@ -19,6 +20,7 @@ function Functional(props) {
             email,
             Contact,
             Gen,
+            id: uuidv4(),
         }
 
         props.newStudent(student);
