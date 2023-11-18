@@ -1,49 +1,41 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
 import Functional from './Components/Functional';
 import List from './Components/List';
+import Student_card from './Components/Student_card';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+function App() {
+  const [students, setStudents] = useState([]);
 
-    this.state = {
-      students: [],
-    };
-  }
-
-  createStudent = (student) => {
-    this.setState({
-      students: [...this.state.students, student],
-    });
+  const createStudent = (student) => {
+    setStudents([...students, student]);
   };
 
-  handleDelete = (studentId) => {
-    // Filter out the student with the specified ID
-    const updatedStudents = this.state.students.filter((student) => student.id !== studentId);
-
-    // Update the state with the new student array
-    this.setState({
-      students: updatedStudents,
-    });
+  const handleDelete = (studentId) => {
+    const updatedStudents = students.filter((student) => student.id !== studentId);
+    setStudents(updatedStudents);
   };
 
-  render() {
-    console.log(this.state.students);
-    return (
-      <Container fluid>
-        <Row>
-          <Col xs={12} md={6} lg={6}>
-            <Functional newStudent={this.createStudent} />
-          </Col>
-          <Col xs={12} md={6} lg={6}>
-            <List students={this.state.students} onDelete={this.handleDelete} />
-          </Col>
-        </Row>
-      </Container>
+  const handleUpdate = (updatedStudent) => {
+    const updatedStudents = students.map((student) =>
+      student.id === updatedStudent.id ? updatedStudent : student
     );
-  }
+    setStudents(updatedStudents);
+  };
+
+  return (
+    <Container fluid>
+      <Row>
+        <Col xs={12} md={6} lg={6}>
+          <Functional newStudent={createStudent} />
+        </Col>
+        <Col xs={12} md={6} lg={6}>
+          <List students={students} onDelete={handleDelete} onUpdate={handleUpdate} />
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
 export default App;
